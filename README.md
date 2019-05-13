@@ -9,8 +9,8 @@ for RPP payments integration
 ```
  php artisan vendor:publish --providers=php artisan vendor:publish --provider=Samark\RppPayment\Providers\RppServiceProvider
 ```
-<br>
 or 
+
 ```
 php artisan vendor:publish 
 ```
