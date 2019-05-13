@@ -37,8 +37,13 @@ trait DataCurlGuzzleTrait
                 break;
         }
         try {
+            if(request()->has('debug')) {
+                dump($endpoint);
+                dump($params);
+                dump($this->getOptions($options, $headers));
+            }
             $client  = new GuzzleHttpClient();
-            $request = $client->request($method, $endpoint, $this->getOptions($headers));
+            $request = $client->request($method, $endpoint, $this->getOptions($options, $headers));
             return json_decode($request->getBody()->getContents(), true);
         } catch (ClientException $exception) {
             throw new Exception($exception->getMessage(), $exception->getCode());
@@ -52,10 +57,10 @@ trait DataCurlGuzzleTrait
      * @param array $headers
      * @return array
      */
-    public function getOptions($headers = []): array
+    public function getOptions($options = [], $headers = []): array
     {
-        $options                = config(PACKAGE_NAME . '.curl.headers', []);
-        $options['headers']     = !empty($headers) ? $headers : $options['headers'];
+        $header                 = config(PACKAGE_NAME . '.curl.headers', []);
+        $options['headers']     = !empty($headers) ? array_merge($headers, $header) : $header;
         $options['http_errors'] = config(PACKAGE_NAME . '.curl.http_errors', false);
         return array_merge($options, $headers);
     }

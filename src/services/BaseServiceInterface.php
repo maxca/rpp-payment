@@ -39,7 +39,7 @@ interface BaseServiceInterface
      * @param array $multipart
      * @return mixed
      */
-    public function callUpload($params = [], $multipart =[]);
+    public function callUpload($params = [], $multipart = []);
 
     /**
      * @param array $params
@@ -49,7 +49,8 @@ interface BaseServiceInterface
 
     /**
      * @param array $params
+     * @param null $token
      * @return mixed
      */
-    public function callPostBearerAuth($params = []);
+    public function callPostBearerAuth($params = [], $token = null);
 }

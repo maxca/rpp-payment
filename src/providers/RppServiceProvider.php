@@ -4,6 +4,7 @@ namespace Samark\RppPayment\Providers;
 
 use Arcanedev\Support\PackageServiceProvider;
 use Samark\RppPayment\Services\Rpp\RppService;
+use Samark\RppPayment\Facades\RppPayment;
 
 class RppServiceProvider extends PackageServiceProvider
 {
@@ -15,9 +16,10 @@ class RppServiceProvider extends PackageServiceProvider
     {
         parent::register();
 
-        $this->app->bind('RppService', function ($app) {
+        $this->app->bind('RppPayment', function ($app) {
             return $app->make(RppService::class);
         });
+
     }
 
     public function boot()
@@ -28,6 +30,8 @@ class RppServiceProvider extends PackageServiceProvider
 
     public function registerAliases()
     {
-        $this->alias(RppService::class, 'rpp');
+        dd(RppPayment::class);
+        $this->alias(RppPayment::class, 'rpp');
+        dd(app('rpp'));
     }
 }

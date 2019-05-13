@@ -17,6 +17,7 @@ class Auth extends BaseService implements AuthInterface
      */
     protected $configEndpoint = 'auth';
 
+
     /**
      * Auth constructor.
      */
@@ -31,6 +32,6 @@ class Auth extends BaseService implements AuthInterface
      */
     public function getToken(): array
     {
-        return $this->callPostBasicAuth();
+        return $this->callPostBasicAuth(['grant_type' => config(PACKAGE_NAME . '.grant_type')]);
     }
 }

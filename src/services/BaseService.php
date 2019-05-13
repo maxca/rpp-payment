@@ -21,12 +21,12 @@ class BaseService implements BaseServiceInterface
     /**
      * @var
      */
-    protected $params;
+    protected $params = [];
 
     /**
      * @var
      */
-    protected $headers;
+    protected $headers = [];
 
     /**
      * @var
@@ -157,9 +157,38 @@ class BaseService implements BaseServiceInterface
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function callPostBearerAuth($params = [])
+    public function callPostBearerAuth($params = [], $token = null)
     {
+        self::getBearer($token);
+        $this->setHeaders([
+            'headers' => [
+                'Content-Type'  => 'application/json',
+                'Accept'        => 'application/json',
+                'Authorization' => 'Bearer ' . $token,
+            ],
+            'json'    => $params,
+        ]);
         return $this->curlPost($this->endpoint, $params, $this->headers);
+    }
+
+    /**
+     * @param null $token
+     * @return void
+     */
+    protected function getBearer(&$token = null)
+    {
+        $token = $token === null && config(PACKAGE_NAME . '.token.store')
+            ? session(config(PACKAGE_NAME . '.token.name'))
+            : $token;
+    }
+
+    /**
+     * @param $name
+     */
+    protected function setEndpointConfig($name)
+    {
+        $this->setEndpoint(config(PACKAGE_NAME
+            . '.endpoint.' . $this->configList[$name], false));
     }
 
 

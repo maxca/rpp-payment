@@ -5,12 +5,13 @@
     | Setting authentication
     |--------------------------------------------------------------------------
     */
-    'basic' => [
-        'auth'     => [
-            'username' => env('RPP_USERNAME'),
-            'password' => env('RPP_PASSWORD')
+    'basic'      => [
+        'auth' => [
+            env('RPP_USERNAME'),
+            env('RPP_PASSWORD'),
         ],
     ],
+    'grant_type' => 'client_credentials',
 
 
     /*
@@ -18,10 +19,10 @@
    | Setting curl GuzzleHttp
    |--------------------------------------------------------------------------
    */
-    'curl'     => [
+    'curl'       => [
         'http_errors' => false,
         'headers'     => [
-            'Accept' => 'application/json',
+            'Accept'       => 'application/json',
         ],
     ],
     /*
@@ -29,7 +30,7 @@
     | Setting endpoint
     |--------------------------------------------------------------------------
     */
-    'endpoint' => [
+    'endpoint'   => [
 
         /*
         |--------------------------------------------------------------------------
@@ -70,7 +71,19 @@
             'base'   => env('RPP_MERCHANT_URL'),
             'search' => env('RPP_MERCHANT_URL') . '/master-merchant/v1/api/merchants'
         ],
+    ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Setting token store to session ,
+    | default is store
+    |--------------------------------------------------------------------------
+    */
+
+    'token' => [
+        'name'  => 'rpp.token', // session name
+        'store' => true, // set store to session
     ],
 
 ];

@@ -11,40 +11,32 @@ use Samark\RppPayment\Services\BaseService;
  */
 class Otp extends BaseService implements OtpInterface
 {
+    /**
+     * @var array
+     */
     protected $configList = [
         'request' => 'otp.request',
         'verify'  => 'otp.verify',
     ];
 
-    public function __construct()
+    /**
+     * @param array $params
+     * @return mixed|void
+     */
+    public function request($params = [], $token = null)
     {
-        parent::__construct();
+        parent::setEndpointConfig('request');
+        return $this->callPostBearerAuth($params, $token);
     }
 
     /**
      * @param array $params
      * @return mixed|void
      */
-    public function request($params = [])
+    public function verify($params = [], $token = null)
     {
-
-    }
-
-
-    /**
-     * @param array $params
-     * @return mixed|void
-     */
-    public function verify($params = [])
-    {
-
-    }
-
-    public function __call($name, $arguments)
-    {
-        if (array_key_exists($name, $this->configList)) {
-            $this->configEndpoint = $this->configList[$name];
-        }
+        parent::setEndpointConfig('verify');
+        return $this->callPostBearerAuth($params, $token);
     }
 
 

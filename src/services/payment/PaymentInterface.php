@@ -7,16 +7,22 @@ namespace Samark\RppPayment\Services\Payment;
  * @package Samark\RppPayment\Services\Payment
  * @author samark chisanguan <samarkchsngn@gmail.com>
  */
-interface PaymentInterface {
+interface PaymentInterface
+{
 
     /**
+     * @param array $params
+     * @param null $token
      * @return mixed
      */
-    public function charge($params=[]);
+    public function charge($params = [], $token = null);
+
 
     /**
+     * @param array $params
+     * @param null $token
      * @return mixed
      */
-    public function refund();
+    public function cancel($params = [], $token = null);
 
 }

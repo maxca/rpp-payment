@@ -29,6 +29,11 @@ class RppService implements RppServiceInterface
     protected $payment;
 
     /**
+     * @var string bearer token
+     */
+    protected $token;
+
+    /**
      * RppService constructor.
      * @param \Samark\RppPayment\Services\Auth\Auth $auth
      * @param \Samark\RppPayment\Services\Otp\Otp $otp
@@ -47,39 +52,71 @@ class RppService implements RppServiceInterface
      */
     public function getToken()
     {
-        return $this->auth->getToken();
+        $auth = $this->auth->getToken();
+        if (isset($auth['access_token']) && self::getConfigStoreToken()) {
+            $this->token = $auth['access_token'];
+            session(config(PACKAGE_NAME . '.token.name'), $auth);
+        }
+        if(request()->has('debug')) {
+            dump($auth);
+        }
+        return $auth;
     }
 
     /**
-     *
+     * @return $this
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function requestOtp()
+    public function token()
     {
-        // TODO: Implement requestOtp() method.
+        self::getToken();
+        return $this;
     }
 
     /**
-     *
+     * @return \Illuminate\Config\Repository|mixed
      */
-    public function verifyOtp()
+    protected function getConfigStoreToken()
     {
-        // TODO: Implement verifyOtp() method.
+        return config(PACKAGE_NAME . '.token.store', false);
     }
 
     /**
-     *
+     * @param array $params
+     * @return mixed|void
      */
-    public function charge()
+    public function requestOtp($params = [])
     {
-        // TODO: Implement charge() method.
+        return $this->otp->request($params, $this->token);
     }
 
     /**
-     *
+     * @param array $params
+     * @return mixed|void
      */
-    public function refund()
+    public function verifyOtp($params = [])
     {
+        return $this->otp->verify($params, $this->token);
+    }
 
+
+    /**
+     * @param array $params
+     * @return mixed|void
+     */
+    public function charge($params = [])
+    {
+        return $this->payment->charge($params, $this->token);
+    }
+
+
+    /**
+     * @param array $params
+     * @return mixed
+     */
+    public function cancel($params = [])
+    {
+        return $this->payment->cancel($params, $this->token);
     }
 
 
