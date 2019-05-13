@@ -33,27 +33,30 @@ public function getToken() {
 
 public function otp() {
      $data = RppPayment::token()
-                ->requestOtp(['mobile' => '08xxxxxxx']);
+            ->requestOtp(['mobile' => '08xxxxxxx']);
 }
 
 public function verify() {
      $data = RppPayment::token()
-                ->requestOtp(['mobile' => '08xxxxxxx','key' => 'value']);
+            ->verifyOtp(['mobile' => '08xxxxxxx','key' => 'value']);
 }
 
 public function charge() {
     $data = RppPayment::token()
-                    ->charge(['mobile' => '08xxxxxxx','key' => 'value']);
+            ->charge(['mobile' => '08xxxxxxx','key' => 'value']);
 }
 
-public function verifyOtp() {
+public function cancel() {
     $data = RppPayment::token()
-                    ->cancel(['mobile' => '08xxxxxxx','key' => 'value']);
+            ->cancel(['mobile' => '08xxxxxxx','key' => 'value']);
 }
 ...
 ...
 
 ```
-
+# config please read in comment in file how to change it.
+```$xslt
+config\rpp-payment.php
+```
 # support
 samarkchsngn@gmail.com
