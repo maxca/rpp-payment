@@ -7,7 +7,7 @@ for RPP payments integration
 ```
 # publish vendor configuration 
 ```
- php artisan vendor:publish --providers=php artisan vendor:publish --provider=Samark\RppPayment\Providers\RppServiceProvider
+ php artisan vendor:publish --provider=Samark\RppPayment\Providers\RppServiceProvider
 ```
 or 
 
