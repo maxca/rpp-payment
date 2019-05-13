@@ -1,0 +1,21 @@
+version: '2.1'
+
+services:
+  app:
+    image: maxca789/apache-php72
+    container_name: rpp-payments
+    restart: always
+    ports:
+      - "7001:80"
+    volumes:
+      - .:/var/www/html
+    mem_limit: 1024m
+    networks:
+      - default
+    cap_add:
+      - SYS_PTRACE
+
+
+
+
+
