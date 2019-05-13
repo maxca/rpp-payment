@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static string requestOtp($params)
  * @method static string verifyOtp()
  * @method static string charge()
- * @method static string refund()
+ * @method static string cancel()
  *
  * @see \Illuminate\Foundation\Application
  */

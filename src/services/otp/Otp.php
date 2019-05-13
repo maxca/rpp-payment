@@ -19,9 +19,12 @@ class Otp extends BaseService implements OtpInterface
         'verify'  => 'otp.verify',
     ];
 
+
     /**
      * @param array $params
-     * @return mixed|void
+     * @param null $token
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function request($params = [], $token = null)
     {
@@ -29,9 +32,12 @@ class Otp extends BaseService implements OtpInterface
         return $this->callPostBearerAuth($params, $token);
     }
 
+
     /**
      * @param array $params
-     * @return mixed|void
+     * @param null $token
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function verify($params = [], $token = null)
     {

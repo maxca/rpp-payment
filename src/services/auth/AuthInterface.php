@@ -9,8 +9,9 @@ namespace Samark\RppPayment\Services\Auth;
  */
 interface AuthInterface
 {
+
     /**
-     * @return mixed
+     * @return array
      */
     public function getToken(): array;
 }

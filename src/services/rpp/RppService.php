@@ -81,18 +81,22 @@ class RppService implements RppServiceInterface
         return config(PACKAGE_NAME . '.token.store', false);
     }
 
+
     /**
      * @param array $params
-     * @return mixed|void
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function requestOtp($params = [])
     {
         return $this->otp->request($params, $this->token);
     }
 
+
     /**
      * @param array $params
-     * @return mixed|void
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function verifyOtp($params = [])
     {
@@ -102,7 +106,8 @@ class RppService implements RppServiceInterface
 
     /**
      * @param array $params
-     * @return mixed|void
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function charge($params = [])
     {
@@ -113,6 +118,7 @@ class RppService implements RppServiceInterface
     /**
      * @param array $params
      * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function cancel($params = [])
     {
