@@ -19,7 +19,6 @@ class Payment extends BaseService implements PaymentInterface
         'cancel' => 'payment.cancel',
     ];
 
-
     /**
      * @param array $params
      * @param null $token
@@ -31,7 +30,6 @@ class Payment extends BaseService implements PaymentInterface
         parent::setEndpointConfig('charge');
         return $this->callPostBearerAuth($params, $token);
     }
-
 
     /**
      * @param array $params
