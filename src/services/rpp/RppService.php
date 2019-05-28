@@ -47,19 +47,25 @@ class RppService implements RppServiceInterface
     }
 
     /**
-     * @return array
+     * @param null $token
+     * @return array|mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getToken()
+    public function getToken($token = null)
     {
         $auth = $this->auth->getToken();
-        if (isset($auth['access_token']) && self::getConfigStoreToken()) {
-            $this->token = $auth['access_token'];
-            session(config(PACKAGE_NAME . '.token.name'), $auth);
+        if (is_null($token)) {
+            if (isset($auth['access_token']) && self::getConfigStoreToken()) {
+                $this->token = $auth['access_token'];
+                session(config(PACKAGE_NAME . '.token.name'), $auth);
+            }
+            if (request()->has('debug')) {
+                dump($auth);
+            }
+        } else {
+            $this->token = $token;
         }
-        if(request()->has('debug')) {
-            dump($auth);
-        }
+
         return $auth;
     }
 

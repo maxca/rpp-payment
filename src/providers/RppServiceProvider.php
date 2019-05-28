@@ -5,6 +5,7 @@ namespace Samark\RppPayment\Providers;
 use Arcanedev\Support\PackageServiceProvider;
 use Samark\RppPayment\Services\Rpp\RppService;
 use Samark\RppPayment\Facades\RppPayment;
+use App\Providers\RppRouteServiceProvider;
 
 /**
  * Class RppServiceProvider
@@ -33,6 +34,8 @@ class RppServiceProvider extends PackageServiceProvider
         $this->app->bind('RppPayment', function ($app) {
             return $app->make(RppService::class);
         });
+
+        $this->registerProvider(RppRouteServiceProvider::class);
 
     }
 
