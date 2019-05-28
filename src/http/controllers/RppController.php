@@ -4,6 +4,7 @@ namespace Samark\RppPayment\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Samark\RppPayment\Facades\RppPayment;
+use App\Http\Controllers\Controller;
 
 /**
  * Class RppController
